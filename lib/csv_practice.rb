@@ -11,10 +11,22 @@ def get_all_olympic_athletes(filename)
 end
 
 def total_medals_per_team(olympic_data)
-
+  medals_per_team = {}
+  olympic_data.map do |athlete|
+    unless athlete['Medal'] == 'NA'
+      team = athlete['Team']
+      if medals_per_team.has_key? team
+        medals_per_team[team] += 1
+      else
+        medals_per_team[team] = 1
+      end
+    end
+  end
+  return medals_per_team
 end
 
 def get_all_gold_medalists(olympic_data)
 end
 
 # get_all_olympic_athletes('../data/athlete_events.csv')
+# total_medals_per_team(get_all_olympic_athletes('../data/athlete_events.csv'))
